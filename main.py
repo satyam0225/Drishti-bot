@@ -18,7 +18,7 @@ def listen_for_duration(idle,duration):
 
     try:
         # Recognize the speech
-        text = recognizer.recognize_google(audio,language="hi-IN,en-IN")
+        text = recognizer.recognize_google(audio,language="en-IN,hi-IN")
         return text
     except sr.WaitTimeoutError:
         print("not heared anything")
@@ -29,4 +29,19 @@ def listen_for_duration(idle,duration):
         print(f"Could not request results from Google Speech Recognition service; {e}")
 
 text=listen_for_duration(2,5)
-print(text)
+
+#web interaction
+# specific url opening like google , youtube, etc
+# automated task : email , search(url ), software download 
+# 
+# system navigation 
+# basics: my computer , documents ,recyclye bin ,    
+
+
+def speak(command):
+    engine = pyttsx3.init()
+    engine.say("hello")
+    engine.runAndWait()
+
+
+speak(f"You said {text}")
