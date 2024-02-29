@@ -4,6 +4,8 @@ import speech_recognition as sr
 import pyttsx3
 import webbrowser
 
+from cursor import Cursor
+
 
 chrome_path="C:\\Users\\Sakshi agarwal\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe"
 webbrowser.register('chrome',webbrowser.BackgroundBrowser(chrome_path),1)
@@ -45,3 +47,5 @@ def speak(command):
 
 
 #speak(f"You said {text}")
+    
+cursorObj=Cursor()
