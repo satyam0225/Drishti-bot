@@ -29,7 +29,7 @@ def listen_for_duration(idle,duration):
         print(f"Could not request results from Google Speech Recognition service; {e}")
 
 text=listen_for_duration(2,5)
-
+print(text)
 #web interaction
 # specific url opening like google , youtube, etc
 # automated task : email , search(url ), software download 
@@ -44,4 +44,4 @@ def speak(command):
     engine.runAndWait()
 
 
-speak(f"You said {text}")
+#speak(f"You said {text}")
