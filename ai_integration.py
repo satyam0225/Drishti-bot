@@ -21,5 +21,5 @@ def get_answerfrom_model(prompt,model="gpt-3.5-turbo"):
     return  response.choices[0].message.content
 
 ai_setup(api_key)
-r=get_answerfrom_model(prompt="how to make python script interact with web  ")
+r=get_answerfrom_model(prompt="how are you  ")
 print(r)
