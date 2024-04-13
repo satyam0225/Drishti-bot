@@ -1,0 +1,62 @@
+{
+    "result": [
+        {
+            "type": "video",
+            "id": "LB8KwiiUGy0",
+            "title": "Node.js: The Documentary | An origin story",
+            "publishedTime": "2 weeks ago",
+            "duration": "1:02:49",
+            "viewCount": {
+                "text": "344,154 views",
+                "short": "344K views"
+            },
+            "thumbnails": [
+                {
+                    "url": "https://i.ytimg.com/vi/LB8KwiiUGy0/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBBhtwrDI5Hb9UFq9WLo0q8B9PGVQ",
+                    "width": 360,
+                    "height": 202
+                },
+                {
+                    "url": "https://i.ytimg.com/vi/LB8KwiiUGy0/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD951azh1dL4VIa9eCnsx8hg9i5KQ",
+                    "width": 720,
+                    "height": 404
+                }
+            ],
+            "richThumbnail": {
+                "url": "https://i.ytimg.com/an_webp/LB8KwiiUGy0/mqdefault_6s.webp?du=3000&sqp=CKTQ2LAG&rs=AOn4CLD7Sa4Bn5gRksfXnXpvpBJoVaLNMA",
+                "width": 320,
+                "height": 180
+            },
+            "descriptionSnippet": [
+                {
+                    "text": "Back in 2008, most people thought of "
+                },
+                {
+                    "text": "JavaScript",
+                    "bold": true
+                },
+                {
+                    "text": " as just a client-side language. But when Google's V8 appeared, young developer\u00a0..."
+                }
+            ],
+            "channel": {
+                "name": "Honeypot",
+                "id": "UCsUalyRg43M8D60mtHe6YcA",
+                "thumbnails": [
+                    {
+                        "url": "https://yt3.ggpht.com/ytc/AIdro_mLnopXX-jYkH2ENEmuVwLf61NPhGobJmyBx-HaNB1a8_0=s68-c-k-c0x00ffffff-no-rj",
+                        "width": 68,
+                        "height": 68
+                    }
+                ],
+                "link": "https://www.youtube.com/channel/UCsUalyRg43M8D60mtHe6YcA"
+            },
+            "accessibility": {
+                "title": "Node.js: The Documentary | An origin story by Honeypot 344,154 views 2 weeks ago 1 hour, 2 minutes",
+                "duration": "1 hour, 2 minutes, 49 seconds"
+            },
+            "link": "https://www.youtube.com/watch?v=LB8KwiiUGy0",
+            "shelfTitle": null
+        }
+    ]
+}

@@ -9,8 +9,8 @@ import webbrowser
 
 # Initialize the recognizer
 r = sr.Recognizer()
-chrome_path="C:\\Users\\Sakshi agarwal\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe"
-webbrowser.register('chrome',webbrowser.BackgroundBrowser(chrome_path),1)
+# chrome_path="C:\\Users\\Sakshi agarwal\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe"
+# webbrowser.register('chrome',webbrowser.BackgroundBrowser(chrome_path),1)
 
 # Function to convert text to
 # speech
