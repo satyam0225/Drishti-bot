@@ -3,7 +3,7 @@ import win32api as w32
 import win32gui as w32g
 import pyautogui
 
-DOCUMENTS=os.path.normpath(os.path.expanduser("~/Documnets")) 
+DOCUMENTS=os.path.normpath(os.path.expanduser("~/Documents")) 
 DESKTOP=os.path.normpath(os.path.expanduser("~/Desktop"))
 DOWNLOADS=os.path.normpath(os.path.expanduser("~/Downloads"))
 

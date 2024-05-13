@@ -9,21 +9,34 @@ from navigation import *
 from cursor import Cursor
 from common import *
 from web_test import  *
+from ailocal import localGreetingAi,localAi
+import vlc
 
-# from vlctest import VLCPlayer
 # chrome_path="C:\\Users\\Sakshi agarwal\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe"
 # webbrowser.register('chrome',webbrowser.BackgroundBrowser(chrome_path),1)
 
 PATH=os.getcwd()
+
 player=None
+
 
 def openPLayer(filename):
     global player
-    player=VLCPlayer(filename)
+    player=vlc.MediaPlayer(filename)
     player.play()
+    
     time.sleep(5)
 
+def open_word_document(filename):
+    # Check if the file existsexit
+    print(filename)
+    if not os.path.exists(filename):
+        print("File not found.")
+        speak("File not found")
+        return
 
+    # Open the Word document
+    os.system(f"start {filename}")
 
 def listen_for_duration(idle,duration):
     recognizer = sr.Recognizer()
@@ -37,7 +50,7 @@ def listen_for_duration(idle,duration):
 
     try:
         # Recognize the speech
-        text = recognizer.recognize_google(audio,language="en-IN,hi-IN")
+        text = recognizer.recognize_google(audio,language="en-IN")
         return str(text).lower()
 
     except sr.WaitTimeoutError:
@@ -74,12 +87,17 @@ cursorObj=Cursor()
 greet=False
 while True:
     if not greet:
-        speak("good morning")
+        speak(localGreetingAi())
         greet=True
     print(f"You are currently : \n Path ->{PATH}  \n CWD ->{cwd()}" )
-    cmd =listen_for_duration(3,8)
+    cmd =listen_for_duration(5,8)
     print(cmd)
-    if cmd != None and"list directory" in cmd:
+    if cmd !=None and "jarvis" in cmd:
+        resposne_jarvis=(localAi(cmd[7:]))
+        print("AI Resposne:",resposne_jarvis)
+        speak(resposne_jarvis)
+
+    if cmd != None and "list directory" in cmd:
         listdir()
     if cmd !=None and  "where i am" in cmd:
         speak("you are at")
@@ -87,7 +105,7 @@ while True:
 
     if cmd != None  and "make directory" in cmd:
         speak("Give the file name ")
-        filename= listen_for_duration(2,5)
+        filename= listen_for_duration(7,5)
         p=os.getcwd()+f"/{filename}"
         if os.path.exists(p):
             speak("File exists")
@@ -101,11 +119,11 @@ while True:
     
     if cmd != None and "delete directory" in cmd:
         speak("tell the directory name to be deleted")
-        filename= listen_for_duration(1,5)
+        filename= listen_for_duration(7,5)
         p=cwd()+f"/{filename}"
         if os.path.exists(p):
-            speak("Is file empty or not")
-            res=listen_for_duration(1,5)
+            speak("Is file empty or not , Say yes or no")
+            res=listen_for_duration(7,5)
             if res != None and "yes" in res:
                 speak(f"removing file named {filename} ")
                 rmdir(filename)
@@ -132,7 +150,7 @@ while True:
     if cmd != None and "change directory" in cmd:
         speak("These are the list of directories select where you want to go")
         listdir()
-        dirname=listen_for_duration(2,5)
+        dirname=listen_for_duration(5,8)
         path=cwd()+f"/{dirname}"
         if os.path.isdir(path):
             chdir(path)
@@ -185,12 +203,16 @@ while True:
     if cmd != None and "search youtube" in cmd:
         speak("tell the keyword to search on youtube")
         time.sleep(1)
-        keyword=listen_for_duration(2,6)
+        keyword=listen_for_duration(8,5)
+        if keyword is None:
+            speak("couldn't understand the word")
+            continue
         speak(keyword)
         limit=10 #deafult
-        speak("do you want to edit the default limit of the search")
+        # speak("do you want to edit the default limit of the search")
         time.sleep(1)
-        res1=listen_for_duration(2,6)
+        # res1=listen_for_duration(2,6)
+        res1="no"
         if res1=='yes':
             speak("tell te limit")
             res2=listen_for_duration(2,6)
@@ -201,17 +223,21 @@ while True:
         else:
             data=(searchYoutube(keyword,limit))
             speak("tell which number link to open")
-            for i in range(data):
+            for i in range(len(data)):
                 print(60+i, data[i][0],data[i][1])
 
             speak("tell the number which you want to open")
-            no=listen_for_duration(1,5)
-            webbrowser.open(data[no%60][1])
-
+            no=int(listen_for_duration(2,6))
+            print(no)
+            if no:
+                webbrowser.open(data[no%60][0])
+            else:
+                speak("coldn't under stand the option you said")
     if cmd !=None and "search google" in cmd:
         speak("tell the keyword to search")
 
-        keyword= listen_for_duration(1,5)
+        keyword= listen_for_duration(10,8)
+        print(keyword)
         data=searchGoogle(keyword)
         print("Result: \n")
         c=0
@@ -220,7 +246,8 @@ while True:
             c+=1
         speak("which link to open the with adding 60 to it")
         time.sleep(5)
-        option=int(listen_for_duration(1,5))
+        option=int(listen_for_duration(10,8))
+        print(option)
         speak("opening link")
         webbrowser.open(data[option%60])
 
@@ -232,17 +259,43 @@ while True:
             if ".mp4" in i:
                 print(i)
         time.sleep(5)
-        filename=listen_for_duration(2,5)
+        filename=listen_for_duration(5,8)
         print(filename)
         openPLayer(f"{cwd()}/{filename}.mp4")
-        
-    
-    if cmd!=None and "close player" in cmd:
+
+    if player!=None and cmd!=None and "play video" in cmd:
+        player.play()    
+    if cmd!=None and "pause video" in cmd:
+        player.pause()
+    if cmd!=None and "close video" in cmd:
         player.stop()
      
+    if cmd!=None and "type" in cmd:
+        speak("say speaking completed when done dictating")
+        words=listen_for_duration(5,8)
+        while("speaking completed" not in words):
+            speak("writing")
+            pyautogui.write(words)
+            pyautogui.press("Enter")
+            words=""
+            time.sleep(2)
+            speak("speak the next line")
+            words=listen_for_duration(5,8)
+        speak("saving file")
+        pyautogui.press("rctrl","S") 
         
-
-    
+    if cmd!=None and "open word file" in cmd:
+        speak("tell which file to open")
+        
+        for i in os.listdir():
+            if ".docx" in i:
+                print(i)
+        time.sleep(5)
+        filename=listen_for_duration(5,8)
+        if filename!=None:
+            open_word_document(filename+".docx")
+        else:
+            speak("unable to understand the filename")    
 
     if cmd !=None and "exit" in cmd:
         break
